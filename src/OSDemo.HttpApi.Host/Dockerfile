@@ -1,11 +1,11 @@
-# Build stage
+# Build stage CAPA 1
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 
-COPY ./src/OSDemo.HttpApi.Host .
-RUN ls -la
+COPY . .
+WORKDIR /src/OSDemo.HttpApi.Host
 RUN dotnet publish "OSDemo.HttpApi.Host.csproj" -c Release -o /app
 
-# Runtime stage
+# Runtime stage CAPA 2
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 
 WORKDIR /app

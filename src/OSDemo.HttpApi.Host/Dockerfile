@@ -1,7 +1,6 @@
 # Build stage
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 
-WORKDIR /src/OSDemo.HttpApi.Host
 COPY . .
 RUN dotnet publish "OSDemo.HttpApi.Host.csproj" -c Release -o /app
 

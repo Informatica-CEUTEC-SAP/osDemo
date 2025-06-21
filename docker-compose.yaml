@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:17.2
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Control123*
+      POSTGRES_DB: OSDemo
+    ports:
+      - "5432:5432"
+  backend:
+    run: |
+       dotnet restore ./src/OSDemo.HttpApi.Host/OSDemo.HttpApi.Host.csproj
+       dotnet build ./src/OSDemo.HttpApi.Host/OSDemo.HttpApi.Host.csproj --no-restore
+       dotnet run --project ./src/OSDemo.HttpApi.Host/OSDemo.HttpApi.Host.csproj
+      
+    build: ./src/OSDemo.HttpApi.Host/
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=db;Database=OSDemo;Username=postgres;Password=Control123*
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    depends_on:
+      - db
+  frontend:
+    build: ./angular/
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend

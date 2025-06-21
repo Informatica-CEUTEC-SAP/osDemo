@@ -1,0 +1,25 @@
+﻿{
+  "applications": {
+    "OSDemo.HttpApi.Host": {
+      "type": "dotnet-project",
+      "launchUrl": "https://localhost:44345",
+      "path": "../../../src/OSDemo.HttpApi.Host/OSDemo.HttpApi.Host.csproj",
+      "kubernetesService": ".*-httpapihost$",
+      "healthCheckEndpoint": "/health-status",
+      "healthUiEndpoint": "/health-ui",
+      "execution": {
+        "order": 4
+      }
+    },
+    "OSDemo.Angular": {
+      "type": "cli",
+      "workingDirectory": "../../../angular",
+      "startCommand": "./start.ps1",
+      "launchUrl": "http://localhost:4200",
+      "kubernetesService": ".*-angular$",
+      "execution": {
+        "order": 2
+      }    
+    }
+  }
+}

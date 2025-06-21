@@ -2,6 +2,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 
 COPY . .
+RUN ls -la
 RUN dotnet publish "OSDemo.HttpApi.Host.csproj" -c Release -o /app
 
 # Runtime stage
